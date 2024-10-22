@@ -8,7 +8,7 @@ def get_base_path(username):
     if username.lower() == 'erik':
         path = "/Users/eriksundstrom/"
     if username.lower() == 'mari':
-        path = "/Users/marividringstad/Desktop/Høst 2024/Store, distribuerte datamengder/" 
+        path = "/Users/marividringstad/Desktop/Høst 2024/Store, distribuerte datamengder/Assignment-3/" 
     if username.lower() == 'tine':
         path = "/Users/tineaas-jakobsen/Desktop/Skrivebord – Tines MacBook Pro/NTNU/TDT4225 Store Distribuerte Datamengder/Assignment-3/"
 

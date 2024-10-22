@@ -18,6 +18,8 @@ class DbConnector:
                  USER="admin",
                  PASSWORD="admin123"):
         uri = f"mongodb://{USER}:{PASSWORD}@{HOST}/{DATABASE}?authSource=admin"
+        #uri = f"mongodb://{HOST}/{DATABASE}"
+
 
         # Connect to the databases
         try:
@@ -36,3 +38,4 @@ class DbConnector:
         self.client.close()
         print("\n-----------------------------------------------")
         print("Connection to %s-db is closed" % self.db.name)
+
