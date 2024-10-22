@@ -10,10 +10,10 @@ db = db_connector.db
 users_collection = db['users']
 activities_collection = db['activities']
 
-# Step 2: Read CSV files using pandas
-users_df = pd.read_csv('users.csv')
-activities_df = pd.read_csv('activities.csv')
-trackpoints_df = pd.read_csv('trackpoints.csv')
+# Step 2: Read CSV files using pandas from the 'cleaned-data' folder
+users_df = pd.read_csv('cleaned-data/users.csv')
+activities_df = pd.read_csv('cleaned-data/activities.csv')
+trackpoints_df = pd.read_csv('cleaned-data/trackpoints.csv')
 
 # Step 3: Insert users data into 'users' collection in bulk
 users_data = [{"_id": str(row['id']), "has_labels": row['has_labels']} for _, row in users_df.iterrows()]
