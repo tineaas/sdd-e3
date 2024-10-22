@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: mongo:6.0  # Use the latest stable MongoDB image
+    container_name: mongodb-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: your_username  # MongoDB admin username
+      MONGO_INITDB_ROOT_PASSWORD: your_password  # MongoDB admin password
+      MONGO_INITDB_DATABASE: your_db_name        # Default database to create
+    ports:
+      - "27017:27017"  # MongoDB's default port
+    volumes:
+      - mongo_data:/data/db  # Volume for persisting MongoDB data
+    networks:
+      - mongo-network
+
+volumes:
+  mongo_data:  # Named volume for MongoDB data storage
+
+networks:
+  mongo-network:  # Custom network for MongoDB service
+
