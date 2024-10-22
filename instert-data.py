@@ -3,23 +3,29 @@ from DbConnector import DbConnector
 from haversine import haversine
 
 # Step 1: Use DbConnector to connect to the database
-db_connector = DbConnector(DATABASE='activity_db', HOST="localhost", USER="admin", PASSWORD="admin123")
+db_connector = DbConnector(DATABASE='strava_mongoDB', HOST="localhost", USER="admin", PASSWORD="admin123")
 
 # Collections
 db = db_connector.db
 users_collection = db['users']
 activities_collection = db['activities']
 
+
 # Step 2: Read CSV files using pandas from the 'cleaned-data' folder
 users_df = pd.read_csv('cleaned-data/users.csv')
-activities_df = pd.read_csv('cleaned-data/activities.csv')
-trackpoints_df = pd.read_csv('cleaned-data/trackpoints.csv')
+activities_df = pd.read_csv('cleaned-data/activity.csv')
+trackpoints_df = pd.read_csv('cleaned-data/trackpoints_final.csv')
+
+print("data read successfully")
+
 
 # Step 3: Insert users data into 'users' collection in bulk
 users_data = [{"_id": str(row['id']), "has_labels": row['has_labels']} for _, row in users_df.iterrows()]
 if users_data:
     users_collection.insert_many(users_data)
 print(f"{len(users_data)} users inserted successfully.")
+
+
 
 # Step 4: Group trackpoints by activity_id to avoid repeated filtering
 trackpoints_grouped = trackpoints_df.groupby('activity_id')
