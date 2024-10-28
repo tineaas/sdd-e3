@@ -70,8 +70,10 @@ for _, activity_row in activities_df.iterrows():
         # Create the activity document without user_id
         activity_data = {
             "_id": activity_id,
-            "start_date_time": activity_row['start_date_time'],
-            "end_date_time": activity_row['end_date_time'],
+            #"start_date_time": activity_row['start_date_time'],
+            "start_date_time": datetime.strptime(activity_row['start_date_time'], "%Y-%m-%d %H:%M:%S"),
+            #"end_date_time": activity_row['end_date_time'],
+            "end_date_time": datetime.strptime(activity_row['end_date_time'], "%Y-%m-%d %H:%M:%S"),
             "transportation_mode": activity_row['transportation_mode'] if pd.notnull(activity_row['transportation_mode']) else None,
             "trackpoints": trackpoints_array,  # Embed trackpoints here
             "total_distance_km": total_distance  # Add total distance here
