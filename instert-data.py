@@ -11,6 +11,9 @@ db = db_connector.db
 users_collection = db['users']
 activities_collection = db['activities']
 
+users_collection.delete_many({})
+activities_collection.delete_many({})
+
 # Step 2: Read CSV files using pandas from the 'cleaned-data' folder
 users_df = pd.read_csv('cleaned-data/users.csv')
 activities_df = pd.read_csv('cleaned-data/activity.csv')
