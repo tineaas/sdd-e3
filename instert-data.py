@@ -1,6 +1,7 @@
 import pandas as pd
 from DbConnector import DbConnector
 from haversine import haversine
+from datetime import datetime
 
 # Step 1: Use DbConnector to connect to the database
 db_connector = DbConnector(DATABASE='strava_mongoDB', HOST="localhost", USER="admin", PASSWORD="admin123")
@@ -53,7 +54,8 @@ for _, activity_row in activities_df.iterrows():
                 "lon": tp_row['lon'],
                 "altitude": tp_row['altitude'],
                 "date_days": tp_row['date_days'],
-                "date_time": tp_row['date_time']
+                #"date_time": tp_row['date_time']
+                "date_time": datetime.strptime(tp_row['date_time'], "%Y-%m-%d %H:%M:%S") 
             }
             trackpoints_array.append(trackpoint_data)
 
@@ -68,8 +70,10 @@ for _, activity_row in activities_df.iterrows():
         # Create the activity document without user_id
         activity_data = {
             "_id": activity_id,
-            "start_date_time": activity_row['start_date_time'],
-            "end_date_time": activity_row['end_date_time'],
+            #"start_date_time": activity_row['start_date_time'],
+            "start_date_time": datetime.strptime(activity_row['start_date_time'], "%Y-%m-%d %H:%M:%S"),
+            #"end_date_time": activity_row['end_date_time'],
+            "end_date_time": datetime.strptime(activity_row['end_date_time'], "%Y-%m-%d %H:%M:%S"),
             "transportation_mode": activity_row['transportation_mode'] if pd.notnull(activity_row['transportation_mode']) else None,
             "trackpoints": trackpoints_array,  # Embed trackpoints here
             "total_distance_km": total_distance  # Add total distance here
